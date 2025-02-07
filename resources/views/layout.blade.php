@@ -30,13 +30,13 @@
         <a href="{{url('/students')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           students table
         </a>
-        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        <a href="{{Route('form-login')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           connexion
         </a>
         <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           Settings
         </a>
-        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        <a href="{{Route('logout')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           Logout
         </a>
       </nav>
