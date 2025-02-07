@@ -14,7 +14,19 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+              'neon-300': '#ff14bc',
+              'neon-400': '#146aff',
+              'neon-500': '#146aff',
+              'neon-700': '#ff14bc',
+            },
+            boxShadow: {
+              'neon': '0 0 10px  #ff14bc, 0 0 20px #146aff, 0 0 40px #b509b5f',
+            },
+            variants: {},
+    plugins: [],
         },
     },
     plugins: [],
 };
+

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>students management</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-900 ">
   <div class="flex h-screen">
     <!-- Sidebar -->
     <div id="sidebar" class="bg-gray-800 text-white w-64 space-y-6 py-7 px-2 transition-all duration-300 ease-in-out relative">
@@ -24,11 +24,14 @@
 
       <!-- Navigation Links -->
       <nav>
-        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        <a href="{{url('/')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+          home
+        </a>
+        <a href="{{url('/students')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           students table
         </a>
-        <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
-          Profile
+        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+          connexion
         </a>
         <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           Settings
