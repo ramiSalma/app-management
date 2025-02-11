@@ -3,7 +3,7 @@
 
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-black bg-opacity-75">
+<div class="min-h-screen flex items-center justify-center  bg-opacity-75">
     <div class="bg-transparent p-8 rounded-lg shadow-neon border-2 border-neon-500 w-full max-w-md">
         <h2 class="text-3xl font-bold text-center mb-6 text-neon-500">Login</h2>
         <form method="POST" action="{{ route('login') }}">

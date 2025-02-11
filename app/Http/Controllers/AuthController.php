@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Student; // Ensure the Student model is imported
 
 class AuthController extends Controller
 {
@@ -13,23 +16,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // $credentials = $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required'
-        // ]);
+        // Validate incoming request
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-        // if (Auth::guard('student')->attempt($credentials)) {
-        //     $request->session()->regenerate();
-        //     return redirect()->url('/students');
-        // }else{
-        //     return back()->withErrors(['email' => 'Invalid credentials']);
-        // }
-        $login = $request->login ;
-        $password = $request->password ;
-        $credentials = ["email" => $login , "password" => $password];
-        dd(Auth::guard('student')->attempt($credentials));
+        // Find the student by email
+        $student = Student::where('email', $credentials['email'])->first();
 
-        
+        // Check if student exists and verify the password
+        if ($student && Hash::check($credentials['password'], $student->password)) {
+            Auth::guard('student')->login($student);
+            $request->session()->regenerate();
+            return redirect()->route('students.dashboard'); // Change this route as needed
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function logout()
