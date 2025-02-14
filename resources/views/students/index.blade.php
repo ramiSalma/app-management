@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<h1 class="my-10 text-5xl text-cyan-700">students application</h1>
+<h1 class="my-10 text-5xl text-cyan-700">students dashboard</h1>
 <a href="{{url('/students/create')}}" class="bg-purple-500 p-4 text-white rounded-xl shadow-lg hover:shadow-purple-500/100">add student</a>
     <table class="w-full text-sm text-left my-7 rtl:text-right text-gray-500 dark:text-gray-40">
         <thead class="p-9 text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -16,7 +16,9 @@
         <tbody class=" text-gray-300  ">
             @foreach ($students as $student )
                 <tr class="hover:bg-gray-500 transition-all duration-500 ease-in-out">
-                    <td class="py-3 px-6 border-b-2 border-gray-700">{{ $student->id }}</td>
+                    <td class="py-3 px-6 border-b-2 border-gray-700">
+                        <img class="rounded-full" width="50px" height="50px" src="{{$student->image}}" alt="">
+                    </td>
                     <td class="py-3 px-6 border-b-2 border-gray-700">{{ $student->name }}</td>
                     <td class="py-3 px-6 border-b-2 border-gray-700">{{ $student->email }}</td>
                     <td class="py-3 px-6 border-b-2 border-gray-700">{{ $student->phone }}</td>

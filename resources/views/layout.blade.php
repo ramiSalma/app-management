@@ -7,7 +7,7 @@
   @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-900 ">
-  <div class="flex h-screen">
+  <div class="flex  h-screen">
     <!-- Sidebar -->
     <div id="sidebar" class="bg-gray-800 text-white w-64 space-y-6 py-7 px-2 transition-all duration-300 ease-in-out relative">
       <!-- Toggle Button -->
@@ -30,13 +30,19 @@
         <a href="{{url('/students')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           students table
         </a>
-        <a href="{{Route('form-login')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        <a href="{{url('/teachers')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+          teachers 
+        </a>
+        <a href="{{url('/students')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+          courses
+        </a>
+        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           connexion
         </a>
         <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           Settings
         </a>
-        <a href="{{Route('logout')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           Logout
         </a>
       </nav>
