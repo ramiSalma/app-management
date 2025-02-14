@@ -13,6 +13,7 @@ class teacherController extends Controller
      */
     public function index()
     {
+        //$teachers = DB::table('students')->get();
         $teachers = DB::table('teachers')->select("*")->get();
         return view('teachers.index',compact('teachers'));
     }
@@ -22,7 +23,7 @@ class teacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('teachers.create');
     }
 
     /**
@@ -30,7 +31,13 @@ class teacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('teachers')->insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'image' => $request->image,
+        ]);
+        return redirect()->route('teachers.index');
     }
 
     /**
@@ -62,6 +69,8 @@ class teacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // DB::table('teachers')->where('id', $id)->delete();
+        $teacher = DB::delete("delete from teachers where id=$id");
+        return redirect('/teachers')->with('flash message',' deleted');
     }
 }

@@ -12,7 +12,7 @@
         <!-- Avatar -->
         <div class="relative w-28 h-28 mx-auto mb-6">
             <div class="w-full h-full rounded-full bg-gradient-to-r from-blue-400 to-purple-400 opacity-80">
-                <img src={$image} alt="">
+                <img src={{$image}} class="rounded-full" alt="">
             </div>
             {{--  <div class="absolute inset-0 rounded-full border-4 border-transparent bg-gradient-to-r from-blue-400 to-purple-400"></div>  --}}
         </div>
@@ -42,17 +42,10 @@
         <!-- Bio -->
         <p class="text-gray-400 text-center mb-4">{{$address}}</p>
         
-        <!-- Skills -->
-        <div class="flex justify-center gap-3 mb-4">
-            <span class="px-4 py-1 text-sm rounded-full border border-gray-600 text-gray-400 hover:bg-gray-700">UI/UX</span>
-            <span class="px-4 py-1 text-sm rounded-full border border-gray-600 text-gray-400 hover:bg-gray-700">Branding</span>
-            <span class="px-4 py-1 text-sm rounded-full border border-gray-600 text-gray-400 hover:bg-gray-700">Motion</span>
-        </div>
         
         <!-- Actions -->
         <div class="flex gap-4">
             <button class="flex-1 py-2 rounded-lg border border-gray-600 bg-gradient-to-r from-blue-400 to-purple-400 text-white transition-transform hover:scale-105"><a href="{{url('/students')}}">go back</a> </button>
-            <button class="flex-1 py-2 rounded-lg border border-gray-600 text-gray-400 transition-transform hover:bg-gray-700 hover:scale-105">Message</button>
         </div>
     </div>
 </body>
