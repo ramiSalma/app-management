@@ -6,11 +6,11 @@
   <title>students management</title>
   @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-900 ">
+<body class="bg-slate-950 ">
   
   <div class="flex  h-screen">
     <!-- Sidebar -->
-    <div id="sidebar" class="bg-gray-800 text-white w-64 space-y-6 py-7 px-2 transition-all duration-300 ease-in-out relative">
+    <div id="sidebar" class="bg-indigo-950 text-white w-64 space-y-6 py-7 px-2 transition-all duration-300 ease-in-out relative">
       <!-- Toggle Button -->
       <button id="toggleButton" class="absolute -right-7 top-5 p-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 focus:outline-none border-2 border-gray-700">
         <svg id="toggleIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,15 +59,15 @@
           <img width="400px" class="" src="https://img.freepik.com/free-vector/online-education-background_52683-7614.jpg?semt=ais_hybrid" alt="">
         </div>  --}}
           <div class="grid grid-cols-3 gap-6">
-              <div class="bg-gray-800 text-white flex justify-between p-6 rounded-lg shadow-md">
-                <img src="https://cdn-icons-png.flaticon.com/512/2995/2995620.png" width="90" alt="">
+              <div class="bg-indigo-950 text-white flex justify-between p-6 rounded-lg shadow-md">
+                <img src="https://cdn-icons-png.flaticon.com/512/2995/2995620.png" width="60"  alt="">
                 <div>
                   <h3 class="text-xl text-cyan-600 font-semibold">Total Students</h3>
                   <p class="text-3xl text-cyan-600">{{ $studentsCount ?? 0 }}</p>
                 </div>
                 
               </div>
-              <div class="bg-gray-800 flex justify-between text-white p-6 rounded-lg shadow-md">
+              <div class="bg-indigo-950 flex justify-between text-white p-6 rounded-lg shadow-md">
                 <img src="https://cdn-icons-png.freepik.com/256/3750/3750020.png?semt=ais_hybrid" width="90" alt="">
                 <div>
                   <h3 class="text-xl font-semibold text-cyan-600">Total Teachers</h3>
@@ -75,7 +75,7 @@
                 </div>
                   
               </div>
-              <div class="bg-gray-800 flex justify-between text-white p-6 rounded-lg shadow-md">
+              <div class="bg-indigo-950 flex justify-between text-white p-6 rounded-lg shadow-md">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6BIyftNXNGB2sdqgRLh42jgABfDgxAEJm5w&s" width="90" alt="">
                 <div>
                    <h3 class="text-xl text-cyan-600 font-semibold">Total Courses</h3>
@@ -87,11 +87,11 @@
       
           <!-- Chart -->
           <div class="flex justify-between">
-            <div style="width: 600px;height:300px" class="mt-6 bg-gray-800 text-white p-9 shadow-md rounded-lg">
-                        <h1 class="text-center text-yellow-500 mb-2">teachers activity</h1>
+            <div style="width: 400px;height:300px" class="mt-6 bg-indigo-950 text-white p-9 shadow-md rounded-lg">
+                        <h1 class="text-center text-[#ff6833] mb-2">teachers activity</h1>
                           <canvas   id="topTeachersChart"></canvas>
             </div>
-            <div style="width: 550px;height:300px" class="bg-gray-800 mt-6 p-4 shadow-md rounded-lg col-span-1 flex justify-center items-center">
+            <div style="width: 500px;height:300px" class="bg-indigo-950 mt-6 p-4 shadow-md rounded-lg col-span-1 flex justify-center items-center">
               <canvas id="teachersBarChart" class="w-[250px] h-[250px]"></canvas>
             </div>
           </div>
@@ -112,28 +112,21 @@
                 }
         
                 var myChart = new Chart(ctx, {
-                    type: 'pie',
+                    type: 'doughnut', // Changed from 'pie' to 'doughnut'
                     data: {
                         labels: teacherNames,
                         datasets: [{
                             label: 'Courses Taught',
                             data: coursesCount,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',  // Red
-                                'rgba(54, 162, 235, 0.6)',  // Blue
-                                'rgba(255, 206, 86, 0.6)',  // Yellow
-                                'rgba(75, 192, 192, 0.6)',  // Green
-                                'rgba(153, 102, 255, 0.6)'  // Purple
+                                '#9305f2',  
+                                '#33ff9c',  
+                                '#ff6833',  
+                                '#6ba5f2',  
+                                '#30f2f2'  
                             ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1,
-                            color : 'red'
+                            borderColor: 'transparent',
+                            borderWidth: 2
                         }]
                     },
                     options: {
@@ -148,74 +141,53 @@
                 });
             });
         </script>
+        
         <script>
-          document.addEventListener("DOMContentLoaded", function () {
-              var ctx = document.getElementById('teachersBarChart').getContext('2d');
-      
-              var teacherNames = @json($topTeachers->pluck('name')->toArray());
-              var coursesCount = @json($topTeachers->pluck('total_courses')->toArray());
-      
-              if (teacherNames.length === 0 || coursesCount.length === 0) {
-                  console.warn("No data available for the chart.");
-                  return;
-              }
-      
-              // Generate random colors for bars and text
-              function getRandomColor() {
-                  return `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`;
-              }
-      
-              var barColors = teacherNames.map(() => getRandomColor());
-              var textColors = teacherNames.map(() => getRandomColor());
-      
-              var myChart = new Chart(ctx, {
-                  type: 'bar',
-                  data: {
-                      labels: teacherNames,
-                      datasets: [{
-                          label: 'Courses Taught',
-                          data: coursesCount,
-                          backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',  // Red
-                                'rgba(54, 162, 235, 0.6)',  // Blue
-                                'rgba(255, 206, 86, 0.6)',  // Yellow
-                                'rgba(75, 192, 192, 0.6)',  // Green
-                                'rgba(153, 102, 255, 0.6)'  // Purple
-                            ],
-                          borderColor: 'transparent', // Make border fully opaque
-                          borderWidth: 1
-                      }]
-                  },
-                  options: {
-                      responsive: true,
-                      maintainAspectRatio: false,
-                      scales: {
-                          y: {
-                              beginAtZero: true
-                          },
-                          x: {
-                              ticks: {
-                                  color: [
-                                    'rgba(255, 99, 132, 0.6)',  // Red
-                                    'rgba(54, 162, 235, 0.6)',  // Blue
-                                    'rgba(255, 206, 86, 0.6)',  // Yellow
-                                    'rgba(75, 192, 192, 0.6)',  // Green
-                                    'rgba(153, 102, 255, 0.6)'  // Purple
-                                ] 
-                              }
-                          }
-                      },
-                      plugins: {
-                          legend: {
-                              labels: {
-                                  color: getRandomColor() // Colorful legend text
-                              }
-                          }
-                      }
-                  }
-              });
-          });
-      </script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById('teachersBarChart').getContext('2d');
+        
+                var teacherNames = @json($topTeachers->pluck('name')->toArray());
+                var coursesCount = @json($topTeachers->pluck('total_courses')->toArray());
+        
+                if (teacherNames.length === 0 || coursesCount.length === 0) {
+                    console.warn("No data available for the chart.");
+                    return;
+                }
+        
+                var myChart = new Chart(ctx, {
+                    type: 'line', // Changed from 'bar' to 'line'
+                    data: {
+                        labels: teacherNames,
+                        datasets: [{
+                            label: 'Courses Taught',
+                            data: coursesCount,
+                            backgroundColor: '#ff6833',
+                            borderColor: '#ff6833',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4 // Makes the line smooth
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'white'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        
         @endif
            
     
