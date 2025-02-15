@@ -27,7 +27,7 @@
                         <form action="{{url('/students/'. $student->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button class="bg-pink-500  rounded-xl p-4" onclick="return confirm('are you sure?')">delete</button>
+                            <button class="bg-yellow-500  rounded-xl p-4" onclick="return confirm('are you sure?')">delete</button>
                         </form>
                         
                     </td>
@@ -35,7 +35,9 @@
                 </tr>
             @endforeach
         </tbody>
-        
+        <div class="mt-4">
+            {{ $students->links() }}
+        </div>
        
     </table>
 @endsection

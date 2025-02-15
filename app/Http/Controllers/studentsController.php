@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class studentsController extends Controller
@@ -14,7 +15,8 @@ class studentsController extends Controller
      */
     public function index():View
     {
-        $students = student::all();
+        $students = student::paginate(5);
+        //$students = DB::select('select * from students ');
         return view('students.index')->with('students',$students);
     }
 

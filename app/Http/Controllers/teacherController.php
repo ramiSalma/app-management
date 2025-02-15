@@ -14,7 +14,25 @@ class teacherController extends Controller
     public function index()
     {
         //$teachers = DB::table('students')->get();
+        //======QUESTION 1
         $teachers = DB::table('teachers')->select("*")->get();
+        //======QUESTION 2
+        $with_id = DB::table('teachers')->where('id','10');
+        //========QUESTION 3
+        $name_and_email = DB::table('teachers')->select("name","email")->get();
+        //========QUESTION 7
+        $more_twenty = DB::table('students')->select("*")->where('age','>','20');
+        //=======QUESTION 8
+        $order_by_name = DB::table('teacher')->select("DISTINCT name");
+        //========QUESTION 10
+        $total = DB::table('teachers')->count();
+        //========QUESTION 11
+        $moyenne_age = DB::table('students')->avg('age');
+
+
+
+
+
         return view('teachers.index',compact('teachers'));
     }
 
@@ -53,7 +71,8 @@ class teacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher = DB::table('teachers')->where('id', $id)->first();
+        return view('teachers.edit')->with('teacher',$teacher);
     }
 
     /**
@@ -61,7 +80,15 @@ class teacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table('teachers')
+        ->where('id', $id)
+        ->update([
+            'name' => $request->name, 
+            'email' => $request->email,
+            'password' => $request->password,
+            'image' => $request->image
+        ]);
+        return redirect()->route('teachers.index');
     }
 
     /**
