@@ -3,6 +3,7 @@
 use App\Http\Controllers\studentsController;
 use App\Http\Controllers\teacherController;
 use App\Http\Controllers\AuthController;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,24 @@ Route::get('/', function () {
     ->orderByDesc('total_courses')
     ->limit(5)
     ->get();
-    return view('layout', compact('studentsCount', 'teachersCount', 'coursesCount','topTeachers'));
+
+
+    $stats = Student::selectRaw("
+            COUNT(CASE WHEN gender = 'male' THEN 1 END) as male_count,
+            COUNT(CASE WHEN gender = 'female' THEN 1 END) as female_count,
+            AVG(CASE WHEN gender = 'male' THEN TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) END) as avg_male_age,
+            AVG(CASE WHEN gender = 'female' THEN TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) END) as avg_female_age
+        ")
+        ->first();
+
+    $labels = ['Male', 'Female'];
+    $studentsCountGender = [$stats->male_count, $stats->female_count];
+    $avgAges = [round($stats->avg_male_age, 1) ?? 0, round($stats->avg_female_age, 1) ?? 0];
+
+    //return view('dashboard', compact('labels', 'studentsCount', 'avgAges'));
+
+    
+    return view('layout', compact('studentsCount', 'teachersCount', 'coursesCount','topTeachers','labels','studentsCountGender','avgAges'));
 
 });
 
