@@ -19,7 +19,7 @@
         <a href="{{url('/teachers')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           teachers 
         </a>
-        <a href="{{url('/students')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        <a href="{{url('/courses')}}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
           courses
         </a>
         <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">

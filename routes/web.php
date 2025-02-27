@@ -3,6 +3,7 @@
 use App\Http\Controllers\studentsController;
 use App\Http\Controllers\teacherController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TpController;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -50,3 +51,4 @@ Route::get('/', function () {
 // });
 Route::resource('/students',studentsController::class);
 Route::resource('/teachers',teacherController::class);
+Route::resource('/courses',TpController::class);

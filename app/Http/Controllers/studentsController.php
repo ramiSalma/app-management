@@ -47,7 +47,7 @@ class studentsController extends Controller
         return view('students.show')->with('student',$student);
     }
 
-    /**
+    /** 
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
